@@ -23,15 +23,18 @@ public class Deck {
         return "Deck    : " + deck;
     }
 
-    public Card getCard(int i) { //getCard method 
-        return deck.get(i);
-    }
-
     public void removeCard(int i) { //Used to remove the card
         deck.remove(i); 
         
     }
-    public int getDeckSize() {
-        return deck.size();
-    }
+
+	public ArrayList<Card> getDeck() {
+		return deck;
+	}
+
+	public void setDeck(ArrayList<Card> deck) {
+		this.deck = deck;
+	}
+    
+    
 }

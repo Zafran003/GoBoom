@@ -30,6 +30,11 @@
 			<artifactId>openjfx-78-backport</artifactId>
 			<version>1.8.0-ea-b96.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>maven-unit-test</finalName>
@@ -42,13 +47,6 @@
 			</plugin>
 
 			<plugin>
-
-				<dependencies>
-
-
-				</dependencies>
-
-
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 

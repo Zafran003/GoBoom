@@ -5,6 +5,10 @@ public class Card {
     private CardValue suit;
     private CardValue value;
 
+    public Card() {
+
+    }
+    
     public Card(CardValue suit, CardValue value) {
         this.suit = suit;
         this.value = value;

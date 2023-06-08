@@ -1,0 +1,14 @@
+{
+  "leadCard": {
+    "suit": "d7",
+    "value": "d7"
+  },
+  "player1": {
+    "playerName": "Player 1",
+    "playedCard": null
+  },
+  "player2": null,
+  "player3": null,
+  "player4": null,
+  "trickCount": 0
+}
