@@ -22,6 +22,13 @@ public class MemoryUtil {
         GameMemory gameMemory = new GameMemory();
         gameMemory.setLeadCard(leadCard);
         gameMemory.setPlayer1(player1);
+        gameMemory.setPlayer2(player2);
+        gameMemory.setPlayer3(player3);
+        gameMemory.setPlayer4(player4);
+        gameMemory.getCenterArray().add(leadCard);
+        // Print out the cards in the players' hands
+        gameMemory.setTrickCount(1);
+
         //Object to JSON in file
         mapper.writeValue(new File(RESOURCE_JSON + "memory.json"), gameMemory);
         
