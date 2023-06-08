@@ -20,7 +20,7 @@ class PlayerServiceImplTest {
 
 	// Objective of test 
 	// Positive/Negative Scenario Test
-	// Passing parameter
+	// Expected Result 
 	@Test
 	void testWinnerAllDataPlayer1() throws JsonParseException, JsonMappingException, IOException {
 		PlayerService playerService = new PlayerServiceImpl();
@@ -34,4 +34,20 @@ class PlayerServiceImplTest {
 		assertTrue(player.getPlayerName().equals("Player 1"));
 	}
 
+	// Objective of test 
+	// Positive/Negative Scenario Test
+	// Expected Result 
+	@Test
+	void testWinner1DataPlayer1() throws JsonParseException, JsonMappingException, IOException {
+		PlayerService playerService = new PlayerServiceImpl();
+		ObjectMapper mapper = new ObjectMapper();
+
+		GameMemory gameMemory = mapper.readValue(new File(RESOURCE + "memory_determineFirstPlayer_1_array_value.json"), GameMemory.class);
+
+		Player player = playerService.determineFirstPlayer(gameMemory.getLeadCard(), gameMemory.getPlayer1(),
+				gameMemory.getPlayer2(), gameMemory.getPlayer3(), gameMemory.getPlayer4(), 0);
+		assertNotNull(player);
+		assertTrue(player.getPlayerName().equals("Player 1"));
+	}
+	
 }

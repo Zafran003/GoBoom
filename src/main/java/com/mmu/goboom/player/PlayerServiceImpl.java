@@ -37,6 +37,7 @@ public class PlayerServiceImpl implements PlayerService{
     public Player determineFirstPlayer(Card leadCard, Player player1, Player player2, Player player3,
             Player player4, int trickCount) {
     	
+    	// TODO: temporary to store the data
     	try {
 			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount);
 		} catch (JsonGenerationException e) {
