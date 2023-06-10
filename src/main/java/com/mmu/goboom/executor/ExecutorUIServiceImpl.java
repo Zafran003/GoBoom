@@ -13,11 +13,11 @@ import com.mmu.goboom.player.MemoryUtil;
 import com.mmu.goboom.player.PlayerService;
 import com.mmu.goboom.player.PlayerServiceImpl;
 import com.mmu.goboom.player.PlayerUtil;
-import com.mmu.goboom.ui.AlertUtil;
 import com.mmu.goboom.ui.UIMemory;
+import com.mmu.goboom.ui.util.AlertUtil;
 import com.mmu.goboom.ui.util.StaticString;
 
-public class ExecutorUIServiceImpl implements ExecutorUIService {
+public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIService {
 
 	@Override
 	public void run(Card leadCard, Player player1, Player player2, Player player3, Player player4, int trickCount,
@@ -31,9 +31,9 @@ public class ExecutorUIServiceImpl implements ExecutorUIService {
 			PlayerService playerService = new PlayerServiceImpl();
 
 			lastPlayer = playerService.determineFirstPlayer(leadCard, player1, player2, player3, player4, trickCount);
-			printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer);
+			MemoryUtil.printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer);
 
-			UIMemory.text_label = "Turn " + lastPlayer.toString();
+			this.printLastPlayer(lastPlayer);
 		}
 
 		if (loopTurn > 0 && loopTurn < 4) {
@@ -46,9 +46,10 @@ public class ExecutorUIServiceImpl implements ExecutorUIService {
 			}
 
 			lastPlayer = PlayerUtil.getNextPlayer(lastPlayer, player1, player2, player3, player4);
-			UIMemory.text_label = "Turn " + lastPlayer.toString();
 
-			UIMemory.consoleText = printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer).toString();
+			this.printLastPlayer(lastPlayer);
+
+			MemoryUtil.printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer);
 
 			if (loopTurn == 3) {
 				loopTurn = 0;
@@ -59,7 +60,7 @@ public class ExecutorUIServiceImpl implements ExecutorUIService {
 		}
 
 		loopTurn++;
-		
+
 		// TODO: temporary to store the data
 		try {
 			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, loopTurn);
@@ -73,65 +74,11 @@ public class ExecutorUIServiceImpl implements ExecutorUIService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		 
 
 	}
 
-	public boolean switchUser(String userInput, Deck deck, Player currentPlayer, ArrayList<Card> centerArray) {
-		boolean isValidInput = false;
-		switch (userInput) { // what the user entered
-		case "s": // suppose to start a new game
-			isValidInput = true;
-		case "x": // exits the game
-			System.exit(0);
-		case "d": // Draw cards from deck
-
-			while (deck.getDeck().size() > 0) {
-				String result = currentPlayer.drawCard(centerArray, deck);
-				if (result.equals("success")) {
-					isValidInput = true;
-				} else if (result.equals("error")) {
-					isValidInput = true;
-				}
-			}
-			break;
-		default:
-
-			if (currentPlayer.playCard(userInput, centerArray)) {
-				isValidInput = true;
-			} else {
-				System.out.println("Invalid input, please enter again.\n");
-				isValidInput = false;
-			}
-		}
-
-		return isValidInput;
-	}
-	
-	public static StringBuffer printExecutor(Player player1, Player player2, Player player3, Player player4, int trickCount,
-			Deck deck, ArrayList<Card> centerArray, Player lastPlayer) {
-		StringBuffer buffer = new StringBuffer();
-
-		buffer.append("Trick #" + trickCount); // Perform trick logic here
-		buffer.append("\n");
-		buffer.append(player1);
-		buffer.append("\n");
-		buffer.append(player2);
-		buffer.append("\n");
-		buffer.append(player3);
-		buffer.append("\n");
-		buffer.append(player4);
-		buffer.append("\n");
-		buffer.append("Center  : " + centerArray.toString()); // The center card
-		buffer.append("\n");
-		buffer.append(deck);
-		buffer.append("\n");
-		buffer.append("Score   : Player1 = 0 | Player2 = 0 | Player3 = 0 | Player4 = 0");
-		buffer.append("\n");
-		buffer.append("Turn " + lastPlayer);
-		
-		System.out.println(buffer.toString());
-		return buffer;
+	@Override
+	public void printLastPlayer(Player lastPlayer) {
+		super.printLastPlayer(lastPlayer);
 	}
 }

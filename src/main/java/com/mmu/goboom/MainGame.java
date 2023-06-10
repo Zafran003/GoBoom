@@ -27,12 +27,17 @@ public class MainGame extends Application {
 		InitService InitService = new InitServiceImpl();
 		GameMemory memory = InitService.init();
 
-        UIMemory.GAME_MEMORY_UI = memory;
-	//	ExecutorService executorService = new ExecutorServiceImpl();
-	//	executorService.run(memory.getLeadCard(), memory.getPlayer1(), memory.getPlayer2(), memory.getPlayer3(),
-	//			memory.getPlayer4(), memory.getTrickCount(), memory.getDeck(), memory.getCenterArray());
+		UIMemory.GAME_MEMORY_UI = memory;
 		
-		launch(args);
+		if (args.length > 0 && args[0].equals("console")) {
+			ExecutorService executorService = new ExecutorServiceImpl();
+			executorService.run(memory.getLeadCard(), memory.getPlayer1(), memory.getPlayer2(), memory.getPlayer3(),
+					memory.getPlayer4(), memory.getTrickCount(), memory.getDeck(), memory.getCenterArray());
+
+		} else {
+			launch(args);
+		}
+
 	}
 
 }

@@ -10,7 +10,7 @@ import com.mmu.goboom.player.PlayerService;
 import com.mmu.goboom.player.PlayerServiceImpl;
 import com.mmu.goboom.player.PlayerUtil;
 
-public class ExecutorServiceImpl implements ExecutorService {
+public class ExecutorServiceImpl extends Executor implements ExecutorService {
 
 	@Override
 	public void run(Card leadCard, Player player1, Player player2, Player player3, Player player4, int trickCount,
@@ -62,32 +62,5 @@ public class ExecutorServiceImpl implements ExecutorService {
 		}
 	}
 
-	public void switchUser(String userInput, Deck deck, Player currentPlayer, ArrayList<Card> centerArray) {
 
-		switch (userInput) { // what the user entered
-		case "s": // suppose to start a new game
-			return;
-		case "x": // exits the game
-			System.exit(0);
-		case "d": // Draw cards from deck
-
-			while (deck.getDeck().size() > 0) {
-				String result = currentPlayer.drawCard(centerArray, deck);
-				if (result.equals("success")) {
-					break;
-				} else if (result.equals("error")) {
-					break;
-				}
-			}
-			break;
-		default:
-
-			if (currentPlayer.playCard(userInput, centerArray)) {
-				break;
-			} else {
-				System.out.println("Invalid input, please enter again.\n");
-			}
-			break;
-		}
-	}
 }
