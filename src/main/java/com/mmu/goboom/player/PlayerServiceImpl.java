@@ -1,10 +1,5 @@
 package com.mmu.goboom.player;
 
-import java.io.IOException;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-
 import com.mmu.goboom.Card;
 import com.mmu.goboom.Player;
 
@@ -36,20 +31,6 @@ public class PlayerServiceImpl implements PlayerService{
     @Override
     public Player determineFirstPlayer(Card leadCard, Player player1, Player player2, Player player3,
             Player player4, int trickCount) {
-    	
-    	// TODO: temporary to store the data
-    	try {
-			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount);
-		} catch (JsonGenerationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     	
         if (trickCount == 1) {
             switch (leadCard.getValue()) {

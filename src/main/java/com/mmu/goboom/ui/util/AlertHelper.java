@@ -1,4 +1,4 @@
-package javafx.example;
+package com.mmu.goboom.ui.util;
 
 import javafx.scene.control.Alert;
 import javafx.stage.Window;

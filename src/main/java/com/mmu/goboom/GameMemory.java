@@ -10,7 +10,26 @@ public class GameMemory {
 	private Player player2;
 	private Player player3;
 	private Player player4;
-	private int trickCount;
+	private int trickCount;	
+	private Player lastPlayer;
+	private int loopTurn;
+	
+	public int getLoopTurn() {
+		return loopTurn;
+	}
+
+	public void setLoopTurn(int loopTurn) {
+		this.loopTurn = loopTurn;
+	}
+
+	public Player getLastPlayer() {
+		return lastPlayer;
+	}
+
+	public void setLastPlayer(Player lastPlayer) {
+		this.lastPlayer = lastPlayer;
+	}
+
 	private ArrayList<Card> centerArray = new ArrayList<>();
 
 	public ArrayList<Card> getCenterArray() {
