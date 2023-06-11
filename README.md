@@ -10,3 +10,15 @@ $ cd GoBoom
 $ mvn clean install
 
 ```
+
+To run from Eclipse add the following arguments
+
+Program arguments 
+```
+console 
+```
+
+JVM
+```
+--module-path D:\javafx-sdk-20.0.1\lib --add-modules javafx.controls,javafx.fxml
+```
