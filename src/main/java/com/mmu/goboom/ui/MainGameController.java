@@ -53,13 +53,13 @@ public class MainGameController {
 		textLabel.setText("Game loaded Successfully");
 
 		ExecutorUIService executorUIService = new ExecutorUIServiceImpl();
-		GameMemory memory = UIMemory.GAME_MEMORY_UI;
+		GameMemory memory = MainMemory.GAME_MEMORY_MAIN;
 		executorUIService.printLastPlayer(memory.getLastPlayer());
 		MemoryUtil.printExecutor(memory.getPlayer1(), memory.getPlayer2(), memory.getPlayer3(), memory.getPlayer4(),
 				memory.getTrickCount(), memory.getDeck(), memory.getCenterArray(), memory.getLastPlayer());
-		consoleText.setText(UIMemory.consoleText);
+		consoleText.setText(MainMemory.consoleText);
 		userInput.setDisable(false);
-		textLabel.setText(UIMemory.text_label);
+		textLabel.setText(MainMemory.text_label);
 		this.onLoadButton.setDisable(true);
 	}
 
@@ -73,7 +73,7 @@ public class MainGameController {
 	protected void onResetButtonClicked(ActionEvent event) {
 		InitService InitService = new InitServiceImpl();
 		GameMemory memory = InitService.init();
-		UIMemory.GAME_MEMORY_UI = memory;
+		MainMemory.GAME_MEMORY_MAIN = memory;
 		consoleText.setText("Game Reseted!!");
 		textLabel.setText("Press Play Button to Continue");
 		submitButton.setDisable(false);
@@ -102,21 +102,21 @@ public class MainGameController {
 	}
 
 	private void playGame() {
-		UIMemory.submitButton = submitButton;
+		MainMemory.submitButton = submitButton;
 
 		userInput.setText("");
-		consoleText.setText(UIMemory.consoleText);
+		consoleText.setText(MainMemory.consoleText);
 
-		textLabel.setText(UIMemory.text_label);
+		textLabel.setText(MainMemory.text_label);
 	}
 
 	private void executeCommand() {
 		consoleText.setText("Waiting game to start...");
 
 		ExecutorUIService executorUIService = new ExecutorUIServiceImpl();
-		GameMemory memory = UIMemory.GAME_MEMORY_UI;
+		GameMemory memory = MainMemory.GAME_MEMORY_MAIN;
 		executorUIService.run(memory.getLeadCard(), memory.getPlayer1(), memory.getPlayer2(), memory.getPlayer3(),
-				memory.getPlayer4(), memory.getTrickCount(), memory.getDeck(), memory.getCenterArray(),
+				memory.getPlayer4(), memory.getCurrentPlayer(), memory.getTrickCount(), memory.getDeck(), memory.getCenterArray(),
 				userInput.getText());
 
 		playGame();

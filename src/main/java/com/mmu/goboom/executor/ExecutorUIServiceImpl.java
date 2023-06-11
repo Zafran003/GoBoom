@@ -13,18 +13,18 @@ import com.mmu.goboom.player.MemoryUtil;
 import com.mmu.goboom.player.PlayerService;
 import com.mmu.goboom.player.PlayerServiceImpl;
 import com.mmu.goboom.player.PlayerUtil;
-import com.mmu.goboom.ui.UIMemory;
+import com.mmu.goboom.ui.MainMemory;
 import com.mmu.goboom.ui.util.AlertHelper;
 import com.mmu.goboom.ui.util.StaticString;
 
 public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIService {
 
 	@Override
-	public void run(Card leadCard, Player player1, Player player2, Player player3, Player player4, int trickCount,
+	public void run(Card leadCard, Player player1, Player player2, Player player3, Player player4, Player currentPlayer, int trickCount,
 			Deck deck, ArrayList<Card> centerArray, String userInput) {
-		int loopTurn = UIMemory.GAME_MEMORY_UI.getLoopTurn();
+		int loopTurn = MainMemory.GAME_MEMORY_MAIN.getLoopTurn();
 		System.out.println("loopTurn-->" + loopTurn);
-		Player lastPlayer = UIMemory.GAME_MEMORY_UI.getLastPlayer();
+		Player lastPlayer = MainMemory.GAME_MEMORY_MAIN.getLastPlayer();
 		if (loopTurn == 0) {
 
 			// First player determination
@@ -38,7 +38,7 @@ public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIServic
 
 		if (loopTurn > 0 && loopTurn < 4) {
 			// Rotate the players' turns
-			Player currentPlayer = lastPlayer;
+			currentPlayer = lastPlayer;
 
 			// TODO BOOM must have: create a try catch here, if exception being throw, then throw an error
 			if (!switchUser(userInput, deck, currentPlayer, centerArray)) {
@@ -64,7 +64,7 @@ public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIServic
 
 		// TODO: temporary to store the data
 		try {
-			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, loopTurn, centerArray);
+			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, currentPlayer, loopTurn, centerArray);
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

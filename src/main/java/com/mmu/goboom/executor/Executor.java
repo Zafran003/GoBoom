@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.mmu.goboom.Card;
 import com.mmu.goboom.Deck;
 import com.mmu.goboom.Player;
-import com.mmu.goboom.ui.UIMemory;
+import com.mmu.goboom.ui.MainMemory;
 
 public class Executor {
 
@@ -42,7 +42,7 @@ public class Executor {
 	}
 
 	protected void printLastPlayer(Player lastPlayer) {
-		UIMemory.text_label = "Turn " + lastPlayer.toString();
+		MainMemory.text_label = "Turn " + lastPlayer.toString();
 
 	}
 }

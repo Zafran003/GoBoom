@@ -13,13 +13,13 @@ import com.mmu.goboom.Card;
 import com.mmu.goboom.Deck;
 import com.mmu.goboom.GameMemory;
 import com.mmu.goboom.Player;
-import com.mmu.goboom.ui.UIMemory;
+import com.mmu.goboom.ui.MainMemory;
 
 public class MemoryUtil {
 
 	public static String RESOURCE_JSON = "resource/";
 	public static String write2File(Card leadCard, Player player1, Player player2, Player player3, Player player4,
-			int trickCount, Player lastPlayer, int loopTurn, ArrayList<Card> centerArray) throws JsonGenerationException, JsonMappingException, IOException {
+			int trickCount, Player lastPlayer,  Player currentPlayer, int loopTurn, ArrayList<Card> centerArray) throws JsonGenerationException, JsonMappingException, IOException {
         
         ObjectMapper mapper = new ObjectMapper();
         //User user = new User();
@@ -34,10 +34,11 @@ public class MemoryUtil {
         // Print out the cards in the players' hands
         gameMemory.setTrickCount(1);
         gameMemory.setLoopTurn(loopTurn);
+        gameMemory.setCurrentPlayer(currentPlayer);
 
         //Object to JSON in file
         mapper.writeValue(new File(RESOURCE_JSON + "memory.json"), gameMemory);
-        UIMemory.GAME_MEMORY_UI = gameMemory;
+        MainMemory.GAME_MEMORY_MAIN = gameMemory;
         return mapper.writeValueAsString(gameMemory);
         
 	}
@@ -47,7 +48,7 @@ public class MemoryUtil {
 		ObjectMapper mapper = new ObjectMapper();
 		GameMemory gameMemory = mapper.readValue(Paths.get(RESOURCE_JSON + "memory.json").toFile(), GameMemory.class);
 		
-        UIMemory.GAME_MEMORY_UI = gameMemory;
+        MainMemory.GAME_MEMORY_MAIN = gameMemory;
         return mapper.writeValueAsString(gameMemory);
         
 	}
@@ -55,7 +56,8 @@ public class MemoryUtil {
 	public static StringBuffer printExecutor(Player player1, Player player2, Player player3, Player player4, int trickCount,
 			Deck deck, ArrayList<Card> centerArray, Player lastPlayer) {
 		StringBuffer buffer = new StringBuffer();
-
+		buffer.append("\n\n");
+		
 		buffer.append("Trick #" + trickCount); // Perform trick logic here
 		buffer.append("\n");
 		buffer.append(player1);
@@ -66,6 +68,8 @@ public class MemoryUtil {
 		buffer.append("\n");
 		buffer.append(player4);
 		buffer.append("\n");
+		buffer.append("Last Player: " + lastPlayer);
+		buffer.append("\n");
 		buffer.append("Center  : " + centerArray.toString()); // The center card
 		buffer.append("\n");
 		buffer.append(deck);
@@ -75,13 +79,13 @@ public class MemoryUtil {
 		buffer.append("Turn " + lastPlayer);
 		
 		System.out.println(buffer.toString());
-		UIMemory.consoleText =buffer.toString();
+		MainMemory.consoleText =buffer.toString();
 		return buffer;
 	}
 	
 	public static StringBuffer printExecutor(GameMemory gameMemory) {
 		StringBuffer buffer = new StringBuffer();
-
+		buffer.append("\n\n");
 		buffer.append("Trick #" + gameMemory.getTrickCount()); // Perform trick logic here
 		buffer.append("\n");
 		buffer.append(gameMemory.getPlayer1());
@@ -92,6 +96,8 @@ public class MemoryUtil {
 		buffer.append("\n");
 		buffer.append(gameMemory.getPlayer4());
 		buffer.append("\n");
+		buffer.append("Last Player: " + gameMemory.getLastPlayer());
+		buffer.append("\n");
 		buffer.append("Center  : " + gameMemory.getCenterArray().toString()); // The center card
 		buffer.append("\n");
 		buffer.append(gameMemory.getDeck());
@@ -101,7 +107,7 @@ public class MemoryUtil {
 		buffer.append("Turn " + gameMemory.getLastPlayer());
 		
 		System.out.println(buffer.toString());
-		UIMemory.consoleText =buffer.toString();
+		MainMemory.consoleText =buffer.toString();
 		return buffer;
 	}
 	

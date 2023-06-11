@@ -10,9 +10,18 @@ public class GameMemory {
 	private Player player2;
 	private Player player3;
 	private Player player4;
+	private Player currentPlayer;
 	private int trickCount;	
 	private Player lastPlayer;
 	private int loopTurn;
+
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public void setCurrentPlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
 	
 	public int getLoopTurn() {
 		return loopTurn;

@@ -1,7 +1,7 @@
 package com.mmu.goboom;
 
 import com.mmu.goboom.init.*;
-import com.mmu.goboom.ui.UIMemory;
+import com.mmu.goboom.ui.MainMemory;
 import com.mmu.goboom.ui.util.StaticString;
 
 import javafx.application.Application;
@@ -33,7 +33,7 @@ public class MainGame extends Application {
 		InitService InitService = new InitServiceImpl();
 		GameMemory memory = InitService.init();
 
-		UIMemory.GAME_MEMORY_UI = memory;
+		MainMemory.GAME_MEMORY_MAIN = memory;
 
 		if (args.length > 0 && args[0].equals("console")) {
 			ExecutorService executorService = new ExecutorServiceImpl();
