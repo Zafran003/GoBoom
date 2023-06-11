@@ -14,7 +14,7 @@ import com.mmu.goboom.player.PlayerService;
 import com.mmu.goboom.player.PlayerServiceImpl;
 import com.mmu.goboom.player.PlayerUtil;
 import com.mmu.goboom.ui.UIMemory;
-import com.mmu.goboom.ui.util.AlertUtil;
+import com.mmu.goboom.ui.util.AlertHelper;
 import com.mmu.goboom.ui.util.StaticString;
 
 public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIService {
@@ -40,8 +40,9 @@ public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIServic
 			// Rotate the players' turns
 			Player currentPlayer = lastPlayer;
 
+			// TODO BOOM must have: create a try catch here, if exception being throw, then throw an error
 			if (!switchUser(userInput, deck, currentPlayer, centerArray)) {
-				AlertUtil.showAlert(StaticString.ERROR_MESSAGE, "Incorrect Input, please try again");
+				AlertHelper.showAlert(StaticString.ERROR_MESSAGE, "Incorrect Input, please try again");
 				return;
 			}
 
@@ -63,7 +64,7 @@ public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIServic
 
 		// TODO: temporary to store the data
 		try {
-			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, loopTurn);
+			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, loopTurn, centerArray);
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

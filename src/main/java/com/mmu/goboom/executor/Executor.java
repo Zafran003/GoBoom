@@ -9,13 +9,14 @@ import com.mmu.goboom.ui.UIMemory;
 
 public class Executor {
 
+	// TODO BOOM must have : create validation here of userInput, deck, currentPlayer, centreArray
+	// create a throw Exception here
+	// at least an exception being thrown here
+
 	public boolean switchUser(String userInput, Deck deck, Player currentPlayer, ArrayList<Card> centerArray) {
 		boolean isValidInput = false;
 		switch (userInput) { // what the user entered
-		case "s": // suppose to start a new game
-			isValidInput = true;
-		case "x": // exits the game
-			System.exit(0);
+
 		case "d": // Draw cards from deck
 
 			while (deck.getDeck().size() > 0) {
@@ -39,7 +40,7 @@ public class Executor {
 
 		return isValidInput;
 	}
-	
+
 	protected void printLastPlayer(Player lastPlayer) {
 		UIMemory.text_label = "Turn " + lastPlayer.toString();
 

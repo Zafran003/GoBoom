@@ -19,7 +19,7 @@ public class MemoryUtil {
 
 	public static String RESOURCE_JSON = "resource/";
 	public static String write2File(Card leadCard, Player player1, Player player2, Player player3, Player player4,
-			int trickCount, Player lastPlayer, int loopTurn) throws JsonGenerationException, JsonMappingException, IOException {
+			int trickCount, Player lastPlayer, int loopTurn, ArrayList<Card> centerArray) throws JsonGenerationException, JsonMappingException, IOException {
         
         ObjectMapper mapper = new ObjectMapper();
         //User user = new User();
@@ -30,7 +30,7 @@ public class MemoryUtil {
         gameMemory.setPlayer3(player3);
         gameMemory.setPlayer4(player4);
         gameMemory.setLastPlayer(lastPlayer);
-        gameMemory.getCenterArray().add(leadCard);
+        gameMemory.setCenterArray(centerArray);;
         // Print out the cards in the players' hands
         gameMemory.setTrickCount(1);
         gameMemory.setLoopTurn(loopTurn);
@@ -78,4 +78,31 @@ public class MemoryUtil {
 		UIMemory.consoleText =buffer.toString();
 		return buffer;
 	}
+	
+	public static StringBuffer printExecutor(GameMemory gameMemory) {
+		StringBuffer buffer = new StringBuffer();
+
+		buffer.append("Trick #" + gameMemory.getTrickCount()); // Perform trick logic here
+		buffer.append("\n");
+		buffer.append(gameMemory.getPlayer1());
+		buffer.append("\n");
+		buffer.append(gameMemory.getPlayer2());
+		buffer.append("\n");
+		buffer.append(gameMemory.getPlayer3());
+		buffer.append("\n");
+		buffer.append(gameMemory.getPlayer4());
+		buffer.append("\n");
+		buffer.append("Center  : " + gameMemory.getCenterArray().toString()); // The center card
+		buffer.append("\n");
+		buffer.append(gameMemory.getDeck());
+		buffer.append("\n");
+		buffer.append("Score   : Player1 = 0 | Player2 = 0 | Player3 = 0 | Player4 = 0");
+		buffer.append("\n");
+		buffer.append("Turn " + gameMemory.getLastPlayer());
+		
+		System.out.println(buffer.toString());
+		UIMemory.consoleText =buffer.toString();
+		return buffer;
+	}
+	
 }
