@@ -23,8 +23,10 @@ public class Executor {
 				String result = currentPlayer.drawCard(centerArray, deck);
 				if (result.equals("success")) {
 					isValidInput = true;
+					break;
 				} else if (result.equals("error")) {
 					isValidInput = true;
+					break;
 				}
 			}
 			break;

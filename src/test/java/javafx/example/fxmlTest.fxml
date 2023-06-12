@@ -27,7 +27,7 @@
       </Label>
       <Label fx:id="textLabel2" layoutX="124.0" layoutY="77.0" prefHeight="22.0" prefWidth="534.0" text="Player1=0      Player2=0      Player3=0        Player4=0" />
       <Label fx:id="textLabel21" layoutX="54.0" layoutY="77.0" prefHeight="22.0" prefWidth="48.0" text="Score" />
-      <TextField layoutX="56.0" layoutY="351.0" />
+      <TextField fx:id="consoleText" layoutX="56.0" layoutY="351.0" />
       <Button fx:id="submitButton2" layoutX="484.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="34.0" prefWidth="80.0" text="Reset" />
       <Button fx:id="submitButton3" layoutX="374.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="34.0" prefWidth="80.0" text="Save" />
       <Label fx:id="textLabel22" layoutX="145.0" layoutY="317.0" prefHeight="22.0" prefWidth="404.0" text="[c6, h7, c10, cQ, d10, c7, c9]" />

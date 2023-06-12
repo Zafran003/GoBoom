@@ -64,7 +64,7 @@ public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIServic
 
 		// TODO: temporary to store the data
 		try {
-			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, currentPlayer, loopTurn, centerArray);
+			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, currentPlayer, loopTurn, centerArray, deck);
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -26,16 +26,23 @@ public class ExecutorServiceImpl extends Executor implements ExecutorService {
 	int loopTurn = 0;
 	Player currentPlayer = null;
 	boolean isReload = false;
+
 	@Override
 	public void runFromFile() {
 		try {
 			this.load();
 			this.loopTurn = memory.getLoopTurn();
-			MemoryUtil.printExecutor(memory);
+			// memory.setLastPlayer(memory.getCurrentPlayer());
+
+			MemoryUtil.printExecutor(memory.getPlayer1(), memory.getPlayer2(), memory.getPlayer3(), memory.getPlayer4(),
+					memory.getTrickCount(), memory.getDeck(), memory.getCenterArray(), memory.getCurrentPlayer());
+
+			// MemoryUtil.printExecutor(memory);
+			isReload = true;
+
 			run(memory.getLeadCard(), memory.getPlayer1(), memory.getPlayer2(), memory.getPlayer3(),
 					memory.getPlayer4(), memory.getTrickCount(), memory.getDeck(), memory.getCenterArray());
-			isReload = true;
-			
+
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,11 +84,11 @@ public class ExecutorServiceImpl extends Executor implements ExecutorService {
 					lastPlayer = playerService.determineFirstPlayer(leadCard, player1, player2, player3, player4,
 							trickCount);
 
-					MemoryUtil.printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer);
+					MemoryUtil.printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray,
+							lastPlayer);
 
 				}
 			}
-			
 
 			boolean isPlay = true;
 			for (int i = loopTurn; i < 4; i++) {
@@ -89,17 +96,30 @@ public class ExecutorServiceImpl extends Executor implements ExecutorService {
 
 				if (!isReload) {
 					// Rotate the players' turns
-				    currentPlayer = lastPlayer;
+					currentPlayer = lastPlayer;
 					lastPlayer = PlayerUtil.getNextPlayer(lastPlayer, player1, player2, player3, player4);
 				}
-				System.out.println("current player-->" + currentPlayer);
-				System.out.println("last player-->" + lastPlayer);
-				
+
+				//System.out.println("====Debugging Area====");
+				//System.out.println("player-->" + currentPlayer);
+				//System.out.println("last player-->" + lastPlayer);
+				//System.out.println("trickCount-->" + trickCount);
+				//System.out.println("loop-->" + this.loopTurn);
+				//System.out.println("isReload-->" + this.isReload);
+				//System.out.println("====Debugging Area====");
+
 				System.out.print("> ");
+
+				saveState(leadCard, player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer,
+						currentPlayer, loopTurn);
+
+				// MemoryUtil.printExecutor(player1, player2, player3, player4, trickCount,
+				// deck, centerArray, lastPlayer);
+
 				userInput = scanner.next();
 
-				saveState(leadCard, player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer, currentPlayer,
-						loopTurn);
+				saveState(leadCard, player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer,
+						currentPlayer, loopTurn);
 
 				isPlay = this.isPlay(userInput);
 
@@ -107,22 +127,31 @@ public class ExecutorServiceImpl extends Executor implements ExecutorService {
 					break;
 				}
 
-				switchUser(userInput, deck, currentPlayer, centerArray);
+				boolean isValidInput = switchUser(userInput, deck, currentPlayer, centerArray);
 
-				// TODO BOOM : implement the saveState from the isPlay(String userInput) and remove the line below
-				// the below is auto save
-				saveState(leadCard, player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer, currentPlayer,
-						loopTurn);
+				while (!isValidInput) {
+					System.out.print("> ");
+					userInput = scanner.next();
+					isValidInput = switchUser(userInput, deck, currentPlayer, centerArray);
+				}
 
-				MemoryUtil.printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer);
-				loopTurn++;
-			}
+			// TODO BOOM : implement the saveState from the isPlay(String userInput) and
+			// remove the line below
+			// the below is auto save
+			saveState(leadCard, player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer,
+					currentPlayer, loopTurn);
 
-			trickCount++; // Increment trick count
-			centerArray.clear(); // Clear the centerArray after every trick
-			loopTurn = 0;
+			MemoryUtil.printExecutor(player1, player2, player3, player4, trickCount, deck, centerArray, lastPlayer);
+			loopTurn++;
 			isReload = false;
 		}
+
+		trickCount++; // Increment trick count
+		centerArray.clear(); // Clear the centerArray after every trick
+		loopTurn = 0;
+		isReload = false;
+	}
+
 	}
 
 	protected boolean isPlay(String userInput) throws JsonGenerationException, JsonMappingException, IOException {
@@ -134,7 +163,7 @@ public class ExecutorServiceImpl extends Executor implements ExecutorService {
 		if (isGameSetting) {
 
 			if (userInput.equals(StaticString.EXIT_GAME)) {
-				System.out.println ("Game Exited");
+				System.out.println("Game Exited");
 				System.exit(0);
 			} else if (userInput.equals(StaticString.RESET_GAME)) {
 
@@ -154,6 +183,24 @@ public class ExecutorServiceImpl extends Executor implements ExecutorService {
 	protected void refreshExecutorService(Card leadCard, Player player1, Player player2, Player player3, Player player4,
 			int trickCount, Deck deck, ArrayList<Card> centerArray, Player lastPlayer) {
 		System.out.println("\n\n\n\n=======Refreshing data======");
+
+		leadCard = memory.getLeadCard();
+		player1 = memory.getPlayer1();
+		player2 = memory.getPlayer2();
+		player3 = memory.getPlayer3();
+		player4 = memory.getPlayer4();
+		deck = memory.getDeck();
+		trickCount = memory.getTrickCount();
+		centerArray = memory.getCenterArray();
+		lastPlayer = memory.getLastPlayer();
+		loopTurn = memory.getLoopTurn();
+
+	}
+
+	protected void loadExecutorService(Card leadCard, Player player1, Player player2, Player player3, Player player4,
+			int trickCount, Deck deck, ArrayList<Card> centerArray, Player lastPlayer) {
+		System.out.println("\n\n\n\n=======Refreshing data======");
+
 		leadCard = memory.getLeadCard();
 		player1 = memory.getPlayer1();
 		player2 = memory.getPlayer2();
@@ -176,11 +223,12 @@ public class ExecutorServiceImpl extends Executor implements ExecutorService {
 	}
 
 	protected void saveState(Card leadCard, Player player1, Player player2, Player player3, Player player4,
-			int trickCount, Deck deck, ArrayList<Card> centerArray, Player lastPlayer, Player currentPlayer, int loopTurn) {
+			int trickCount, Deck deck, ArrayList<Card> centerArray, Player lastPlayer, Player currentPlayer,
+			int loopTurn) {
 
 		try {
-			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, currentPlayer, loopTurn,
-					centerArray);
+			MemoryUtil.write2File(leadCard, player1, player2, player3, player4, trickCount, lastPlayer, currentPlayer,
+					loopTurn, centerArray, deck);
 		} catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

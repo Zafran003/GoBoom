@@ -19,7 +19,7 @@ public class MemoryUtil {
 
 	public static String RESOURCE_JSON = "resource/";
 	public static String write2File(Card leadCard, Player player1, Player player2, Player player3, Player player4,
-			int trickCount, Player lastPlayer,  Player currentPlayer, int loopTurn, ArrayList<Card> centerArray) throws JsonGenerationException, JsonMappingException, IOException {
+			int trickCount, Player lastPlayer,  Player currentPlayer, int loopTurn, ArrayList<Card> centerArray, Deck deck) throws JsonGenerationException, JsonMappingException, IOException {
         
         ObjectMapper mapper = new ObjectMapper();
         //User user = new User();
@@ -35,6 +35,7 @@ public class MemoryUtil {
         gameMemory.setTrickCount(1);
         gameMemory.setLoopTurn(loopTurn);
         gameMemory.setCurrentPlayer(currentPlayer);
+        gameMemory.setDeck(deck);
 
         //Object to JSON in file
         mapper.writeValue(new File(RESOURCE_JSON + "memory.json"), gameMemory);
