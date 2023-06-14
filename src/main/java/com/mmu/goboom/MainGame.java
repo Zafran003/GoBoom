@@ -30,11 +30,23 @@ public class MainGame extends Application {
 
 	public static void main(String[] args) {
 
+		// Presentation #1. 
+		// Application initialized here, players, cards for the players , deck values
 		InitService InitService = new InitServiceImpl();
 		GameMemory memory = InitService.init();
 
+		// Presentation #2.
+		// a. memory store in static value(in memory) and in Json (Disk)
+		// b. static value is shared thru-out the entire JVM. All same value in entire JVM
+		// c. UI or Console will have same static value 
 		MainMemory.GAME_MEMORY_MAIN = memory;
 
+		// Presentation #3.
+		// Default no parameter is GUI
+		// If parameter console then start console
+		// 
+		
+		// Presentation #4, open scene builder and explain play button
 		if (args.length > 0 && args[0].equals("console")) {
 			ExecutorService executorService = new ExecutorServiceImpl();
 			try {
@@ -66,6 +78,9 @@ public class MainGame extends Application {
 			}
 
 		} else {
+			
+			// launch GUI
+			// Presentation #4. Explain scene builder
 			launch(args);
 		}
 

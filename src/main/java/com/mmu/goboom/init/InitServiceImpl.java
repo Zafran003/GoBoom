@@ -40,6 +40,7 @@ public class InitServiceImpl implements InitService{
             player4.addCard(playerHands[3][i]);
         }
 
+        // set the memory of players and cards
         gameMemory.setLeadCard(leadCard);
         gameMemory.setPlayer1(player1);
         gameMemory.setPlayer2(player2);

@@ -19,6 +19,9 @@ import com.mmu.goboom.ui.util.StaticString;
 
 public class ExecutorUIServiceImpl  extends Executor implements ExecutorUIService {
 
+	// Presentation #6
+	// Implementation almost same except while loop like console
+	// Implementation here is per click and each click load from static JVM memory 
 	@Override
 	public void run(Card leadCard, Player player1, Player player2, Player player3, Player player4, Player currentPlayer, int trickCount,
 			Deck deck, ArrayList<Card> centerArray, String userInput) {
