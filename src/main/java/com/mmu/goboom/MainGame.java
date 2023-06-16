@@ -29,11 +29,6 @@ public class MainGame extends Application {
 	}
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		InitService InitService = new InitServiceImpl();
-		GameMemory memory = InitService.init();
-		
-=======
 
 		// Presentation #1. 
 		// Application initialized here, players, cards for the players , deck values
@@ -44,7 +39,6 @@ public class MainGame extends Application {
 		// a. memory store in static value(in memory) and in Json (Disk)
 		// b. static value is shared thru-out the entire JVM. All same value in entire JVM
 		// c. UI or Console will have same static value 
->>>>>>> 8acb00cedaaf224f6684503834097ff57f92f8a4
 		MainMemory.GAME_MEMORY_MAIN = memory;
 
 		// Presentation #3.
@@ -56,6 +50,7 @@ public class MainGame extends Application {
 		if (args.length > 0 && args[0].equals("console")) {
 			ExecutorService executorService = new ExecutorServiceImpl();
 			try {
+
 				Scanner scanner = new Scanner(System.in);
 				System.out.println("Enter n for a new game or enter l to load from previous game");
 				System.out.print(">");

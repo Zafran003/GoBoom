@@ -7,17 +7,6 @@ public class Player { // player class where we can create the instances of playe
 	private ArrayList<Card> handOfPlayer;
 	private Card playedCard;
 	private int score;
-<<<<<<< HEAD
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-=======
->>>>>>> 8acb00cedaaf224f6684503834097ff57f92f8a4
 
 	public Player() {
 	}
@@ -71,11 +60,6 @@ public class Player { // player class where we can create the instances of playe
 			}
 		}
 		return false;
-	}
-	
-	private void addScore(String userInput) {
-		
-		this.score = this.score + 1;
 	}
 
 	public void addScore(String userInput) {
