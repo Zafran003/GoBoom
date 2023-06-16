@@ -29,16 +29,14 @@ public class MainGame extends Application {
 	}
 
 	public static void main(String[] args) {
-
 		InitService InitService = new InitServiceImpl();
 		GameMemory memory = InitService.init();
-
+		
 		MainMemory.GAME_MEMORY_MAIN = memory;
 
 		if (args.length > 0 && args[0].equals("console")) {
 			ExecutorService executorService = new ExecutorServiceImpl();
 			try {
-
 				Scanner scanner = new Scanner(System.in);
 				System.out.println("Enter n for a new game or enter l to load from previous game");
 				System.out.print(">");

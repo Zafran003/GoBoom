@@ -75,7 +75,7 @@ public class MemoryUtil {
 		buffer.append("\n");
 		buffer.append(deck);
 		buffer.append("\n");
-		buffer.append("Score   : Player1 = 0 | Player2 = 0 | Player3 = 0 | Player4 = 0");
+		buffer.append("Score   : Player1 = " + player1.getScore() + "| Player2 = " + player2.getScore() + "| Player3 = " + player3.getScore() + "| Player4 = " + player4.getScore());
 		buffer.append("\n");
 		buffer.append("Turn " + lastPlayer);
 		
