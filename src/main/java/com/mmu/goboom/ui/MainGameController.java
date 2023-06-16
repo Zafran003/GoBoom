@@ -84,11 +84,15 @@ public class MainGameController {
 		System.exit(0);
 	}
 
+	// Presentation 4b (continue)
+	// mapped from scene builder and play button 
 	@FXML
 	protected void onSubmitButtonClicked(ActionEvent event) {
 		userInput.setDisable(false);
 		submitButton.setDisable(true);
 		this.onLoadButton.setDisable(true);
+		
+		
 		executeCommand();
 	}
 
@@ -110,11 +114,18 @@ public class MainGameController {
 		textLabel.setText(MainMemory.text_label);
 	}
 
+	// Presentation 5.
+	// Init the ExecutorUIServiceImpl service for GUI
+	// ExecutorServiceImpl for the console
 	private void executeCommand() {
 		consoleText.setText("Waiting game to start...");
 
 		ExecutorUIService executorUIService = new ExecutorUIServiceImpl();
+		
+		// load back from JVM static value
 		GameMemory memory = MainMemory.GAME_MEMORY_MAIN;
+		
+		// Presentation 5b hold ctrl and click run implemention to explain
 		executorUIService.run(memory.getLeadCard(), memory.getPlayer1(), memory.getPlayer2(), memory.getPlayer3(),
 				memory.getPlayer4(), memory.getCurrentPlayer(), memory.getTrickCount(), memory.getDeck(), memory.getCenterArray(),
 				userInput.getText());

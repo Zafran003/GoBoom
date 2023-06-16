@@ -75,7 +75,11 @@ public class MemoryUtil {
 		buffer.append("\n");
 		buffer.append(deck);
 		buffer.append("\n");
+<<<<<<< HEAD
 		buffer.append("Score   : Player1 = " + player1.getScore() + "| Player2 = " + player2.getScore() + "| Player3 = " + player3.getScore() + "| Player4 = " + player4.getScore());
+=======
+		buffer.append("Score   : Player1 = " + player1.getScore() + " | Player2 = " + player2.getScore()+" | Player3 = "+player3.getScore() +" | Player4 = "+player4.getScore()+" |");
+>>>>>>> 8acb00cedaaf224f6684503834097ff57f92f8a4
 		buffer.append("\n");
 		buffer.append("Turn " + lastPlayer);
 		

@@ -9,9 +9,7 @@ import com.mmu.goboom.ui.MainMemory;
 
 public class Executor {
 
-	// TODO BOOM must have : create validation here of userInput, deck, currentPlayer, centreArray
-	// create a throw Exception here
-	// at least an exception being thrown here
+	// this method being shared by console and gui
 
 	public boolean switchUser(String userInput, Deck deck, Player currentPlayer, ArrayList<Card> centerArray) {
 		boolean isValidInput = false;
